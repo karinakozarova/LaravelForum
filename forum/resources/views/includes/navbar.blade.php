@@ -22,10 +22,10 @@
             </ul>
         @else
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item {{ Route::currentRouteNamed('home') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::currentRouteNamed('category.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
                 </li>
                 <li class="nav-item">

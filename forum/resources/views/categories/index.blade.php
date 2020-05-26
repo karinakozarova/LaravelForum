@@ -2,8 +2,6 @@
 
 @section('content')
     @include('categories.partials.alerts')
-    <h3 class="center">Categories</h3>
-
     <div class="container py-3">
         @include('categories.partials.editModal')
         <div class="row">
