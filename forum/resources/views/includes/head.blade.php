@@ -24,4 +24,7 @@
 <!-- Font Awesome includes -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
+<!-- Emoji CSS includes -->
+<link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+
 <link rel="stylesheet" href="{{ asset('css/base.css') }}">
