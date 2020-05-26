@@ -19,7 +19,7 @@
         </a>
 
         @if (count($category->children) > 0)
-        <li class="list-group-item">
+            <li class="list-group-item">
                 <ul class="list-group mt-2">
                     @foreach ($category->children as $child)
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -52,7 +52,7 @@
                         </a>
                     @endforeach
                 </ul>
-        </li>
+            </li>
         @endif
     @endforeach
 </ul>

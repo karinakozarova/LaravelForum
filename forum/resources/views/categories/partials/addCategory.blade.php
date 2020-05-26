@@ -15,7 +15,6 @@
                     @endforeach
                 </select>
             </div>
-
             <div class="form-group">
                 <input type="text" name="name" class="form-control" value="{{ old('name') }}"
                        placeholder="Category Name" required>
