@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+//        $categoriesCount = DB::table('category')->count();
+
+//        $count = $users->count();
+        $categoriesCount = Category::all()->count();
+        $mainCategories = Category::with('children')->whereNull('parent_id')->get()->count();
+        $usersCount = 20;
+
+        return view('home', [ 'categoriesCount' => $categoriesCount, 'mainCategories' => $mainCategories, 'userCount' => $usersCount]);
     }
 }
