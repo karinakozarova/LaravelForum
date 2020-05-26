@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ url('/') }}">
+    <a class="navbar-brand" href="{{ url('/about') }}">
         {{ config('app.name', 'Laravel') }}
     </a>
 
@@ -23,7 +23,7 @@
         @else
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {{ Route::currentRouteNamed('home') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
                 </li>
                 <li class="nav-item {{ Route::currentRouteNamed('category.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
