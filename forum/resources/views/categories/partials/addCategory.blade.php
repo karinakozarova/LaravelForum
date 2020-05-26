@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h3>Add new Category</h3>
+        <b> Add new category </b>
     </div>
 
     <div class="card-body">
@@ -8,7 +8,7 @@
             @csrf
             <div class="form-group">
                 <select class="form-control" name="parent_id">
-                    <option value="">Select Parent Category</option>
+                    <option value="">Select upper category or leave empty</option>
 
                     @foreach ($allCategories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -26,7 +26,7 @@
                        placeholder="Category Description" required>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-success btn-block">Create</button>
             </div>
         </form>
     </div>
