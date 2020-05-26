@@ -11,22 +11,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         @guest
             <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-            </li>
-            @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
-            @endif
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
             </ul>
         @else
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item {{ Route::currentRouteNamed('home') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item {{ Route::currentRouteNamed('category.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -48,7 +48,8 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
