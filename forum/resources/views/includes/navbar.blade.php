@@ -28,6 +28,9 @@
                 <li class="nav-item {{ Route::currentRouteNamed('category.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
                 </li>
+                <li class="nav-item {{ Route::currentRouteNamed('threads.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('threads.index') }}">Threads</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>

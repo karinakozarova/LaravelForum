@@ -28,3 +28,4 @@
 <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
 
 <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+
