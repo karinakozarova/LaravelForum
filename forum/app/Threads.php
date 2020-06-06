@@ -3,8 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Category;
 
 class Threads extends Model
 {
-    protected $fillable = ['title', 'description', 'author_id'];
+        protected $fillable = ['title', 'description', 'author_id', 'category_id'];
+
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function author() {
+        return $this->belongsTo('App\User');
+    }
 }

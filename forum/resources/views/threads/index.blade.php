@@ -2,7 +2,7 @@
 
 @section('content')
 
-<a style="padding-top: -30px !important;" href="{{ route('threads.create') }}" class="btn btn-success btn-block">Create new thread</a>
+<a style="margin-top: -22px !important;" href="{{ route('threads.create') }}" class="btn btn-success btn-block">Create new thread</a>
 
 <div class="container py-3">
     <div class="row">
@@ -10,7 +10,9 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{ $thread->title }}</h5>
+                        <h5>{{ $thread->title }}  <span class="text-muted h5">({{ $thread->category ? $thread->category->name : 'Uncategorized' }})</span></h5>
+                        <p> Created by {{ $thread->author->name }}</p>
+
                     </div>
                     <div class="card-body">
                         <p>{{ substr($thread->description, 0, 100) }}</p>

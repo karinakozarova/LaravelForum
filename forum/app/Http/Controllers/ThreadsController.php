@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Threads;
+use App\Category;
+use Auth;
 use Illuminate\Http\Response;
 
 class ThreadsController extends Controller
@@ -25,7 +27,8 @@ class ThreadsController extends Controller
      */
     public function create()
     {
-        return view('threads.create');
+        $categories = Category::with('children')->whereNull('parent_id')->get();
+        return view('threads.create')->withCategories($categories);
     }
 
     /**
@@ -40,10 +43,11 @@ class ThreadsController extends Controller
         $validatedData = $this->validate($request, [
             'title'         => 'required|min:3|max:255',
             'description'   => 'required|min:3',
-            'author_id'   => 'required'
+            'category_id'   => 'required|numeric',
+            'author_id' => 'required'
         ]);
-        Threads::create($validatedData);
 
+        Threads::create($validatedData);
         return redirect()->route('threads.index');
     }
 
@@ -66,7 +70,12 @@ class ThreadsController extends Controller
      */
     public function edit(Threads $thread)
     {
-        return view('threads.edit')->withThread($thread);
+        if ($thread->author_id != Auth::id()) {
+            return redirect()->back();
+        }
+        $categories = Category::with('children')->whereNull('parent_id')->get();
+
+        return view('threads.edit')->withThread($thread)->withCategories($categories);;
     }
 
     /**
