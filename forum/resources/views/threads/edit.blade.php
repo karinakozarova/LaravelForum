@@ -11,7 +11,6 @@
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" name="title" class="form-control" value="{{ $thread->title }}">
-                        <input type="hidden" name="author_id" class="form-control" value="{{ auth()->user()->id }}">
                     </div>
 
                     <div class="form-group">
