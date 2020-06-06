@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (Session::has('errors'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ implode(", ", $errors->all()) }}',
+            })
+        </script>
+    @endif
+
     <div class="container py-3">
         <h2 class="center"> Add a new thread </h2>
         <div class="row">

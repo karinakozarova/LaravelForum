@@ -93,6 +93,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        if ($category->author_id != Auth::id()) {
+            return redirect()->back();
+        }
+
         $validatedData = $this->validate($request, [
             'name' => 'required|min:3|max:255|string',
             'description' => 'required|min:3|max:255|string'
