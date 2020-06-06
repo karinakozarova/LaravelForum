@@ -3,6 +3,7 @@
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ $category->name }}</h5>
+                @if ($category->author_id == Auth::id())
                 <small>
                     <div class="button-group d-flex">
                         <button type="button" class="btn btn-sm mr-1 edit-category"
@@ -14,6 +15,7 @@
                         @include('categories.partials.destroyCategory')
                     </div>
                 </small>
+                @endif
             </div>
             <p class="mb-1"> {{$category->description}}</p>
         </a>
@@ -25,6 +27,7 @@
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ $child->name }}</h5>
+                                @if ($child->author_id == Auth::id())
                                 <small>
                                     <div class="button-group d-flex">
                                         <button type="button"
@@ -47,6 +50,7 @@
                                         </form>
                                     </div>
                                 </small>
+                                @endif
                             </div>
                             <p class="mb-1"> {{$child->description}}</p>
                         </a>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -54,7 +55,7 @@ class CategoryController extends Controller
             'description' => 'required|min:3|max:255|string',
             'parent_id' => 'sometimes|nullable|numeric'
         ]);
-
+        $validatedData['author_id'] = Auth::id();
         Category::create($validatedData);
 
         return redirect()->route('category.index')->withSuccess('You have successfully created a Category!');
@@ -92,6 +93,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        if ($category->author_id != Auth::id()) {
+            return redirect()->back();
+        }
+
         $validatedData = $this->validate($request, [
             'name' => 'required|min:3|max:255|string',
             'description' => 'required|min:3|max:255|string'

@@ -6,6 +6,7 @@ use App\Threads;
 use App\Category;
 use Auth;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class ThreadsController extends Controller
 {
@@ -34,9 +35,9 @@ class ThreadsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -81,10 +82,10 @@ class ThreadsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param Request $request
+     * @param Threads $thread
      * @return Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update(Request $request, Threads $thread)
     {
