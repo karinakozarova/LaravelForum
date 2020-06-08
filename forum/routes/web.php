@@ -27,3 +27,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('category', 'CategoryController')->middleware('auth');
 Route::resource('threads', 'ThreadsController')->middleware('auth');
+
+Route::post('/comment/store', 'CommentController@store')->name('comment.add');
+Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
