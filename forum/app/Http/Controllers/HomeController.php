@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Threads;
 use Illuminate\Http\Request;
 use App\Category;
+use DB;
 
 class HomeController extends Controller
 {
@@ -24,13 +26,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $categoriesCount = DB::table('category')->count();
-
-//        $count = $users->count();
         $categoriesCount = Category::all()->count();
         $mainCategories = Category::with('children')->whereNull('parent_id')->get()->count();
-        $usersCount = 20;
+        $usersCount = DB::table('users')->get()->count();
+        $thread = DB::table('threads')->orderBy('id', 'DESC')->first();
+        $comment = DB::table('comments')->orderBy('id', 'DESC')->first();
+        $latestUser = DB::table('users')->orderBy('id', 'DESC')->first();
+        $commentThread = Threads::find($comment->commentable_id);
 
-        return view('home', [ 'categoriesCount' => $categoriesCount, 'mainCategories' => $mainCategories, 'userCount' => $usersCount]);
+        return view('home', [
+            'categoriesCount' => $categoriesCount,
+            'mainCategories' => $mainCategories,
+            'userCount' => $usersCount,
+            'latestUser' => $latestUser,
+            'thread' => $thread,
+            'comment' => $comment,
+            'commentThread' => $commentThread,
+        ]);
     }
 }

@@ -3,7 +3,6 @@
         margin-left: 2rem
     }
 </style>
-
 @foreach($comments as $comment)
     <div class="card border-dark">
         <div class="card-body">

@@ -37,32 +37,48 @@
                         <b> Total: </b> {{$categoriesCount}}<br>
                     </div>
                 </div>
+                <br>
+                <div class="card">
+                    <div class="card-header">Newly joined</div>
+                    <div class="card-body">
+                        Our newest member is {{$latestUser->name}}
+                    </div>
+                </div>
             </div>
             <div class="col-md-8">
                 <h3 class="title center"> Dashboard </h3> <br>
 
                 <div class="card">
-                    <div class="card-header">New forum posts</div>
+                    <div class="card-header">Newest thread </div>
                     <div class="card-body">
-
+                        <h4>
+                            {{ $thread->title }}
+                        </h4>
+                        <p>{{ $thread->description }}</p>
+                        <a href="{{ route('threads.show', $thread->id) }}" class="btn btn-primary btn-block">Open thread</a>
                     </div>
                 </div>
                 <br> <br>
                 <div class="card">
                     <div class="card-header">Recently commented</div>
                     <div class="card-body">
+                        <h4>
+                            {{ $commentThread->title }}
+                        </h4>
+                        <p>{{ $commentThread->description }}</p>
 
+
+
+                        <a href="{{ route('threads.show', $commentThread->id) }}" class="btn btn-primary btn-block">Open thread</a>
+                        <hr>
+                        <h5> Latest comment on this thread: </h5>
+                        <p>{{ $comment->body }}</p>
                     </div>
                 </div>
 
                 <br> <br>
 
-                <div class="card">
-                    <div class="card-header">Newly joined</div>
-                    <div class="card-body">
 
-                    </div>
-                </div>
             </div>
         </div>
     </div>
