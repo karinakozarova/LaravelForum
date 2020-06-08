@@ -32,7 +32,11 @@ class HomeController extends Controller
         $thread = DB::table('threads')->orderBy('id', 'DESC')->first();
         $comment = DB::table('comments')->orderBy('id', 'DESC')->first();
         $latestUser = DB::table('users')->orderBy('id', 'DESC')->first();
-        $commentThread = Threads::find($comment->commentable_id);
+        if (!is_null($comment)) {
+            $commentThread = Threads::find($comment->commentable_id);
+        } else {
+            $commentThread = null;
+        }
 
         return view('home', [
             'categoriesCount' => $categoriesCount,
