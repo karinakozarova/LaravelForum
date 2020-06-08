@@ -7,13 +7,20 @@ use App\Category;
 
 class Threads extends Model
 {
-        protected $fillable = ['title', 'description', 'author_id', 'category_id'];
+    protected $fillable = ['title', 'description', 'author_id', 'category_id'];
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo('App\Category');
     }
 
-    public function author() {
+    public function author()
+    {
         return $this->belongsTo('App\User');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
 }
