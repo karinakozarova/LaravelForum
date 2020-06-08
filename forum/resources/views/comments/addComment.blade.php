@@ -4,7 +4,7 @@
         <form method="post" action="{{ route('comment.add') }}">
             @csrf
             <div class="form-group">
-                <input type="text" name="comment_body" class="form-control"/>
+                <input type="text" name="comment_body" class="form-control" required/>
                 <input type="hidden" name="thread_id" value="{{ $thread->id }}"/>
             </div>
             <div class="form-group">
