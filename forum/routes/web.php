@@ -25,6 +25,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/profile/edit', 'UserController@editprofile');
+Route::post('/profile/edit', 'UserController@update_profile');
+
 Route::resource('category', 'CategoryController')->middleware('auth');
 Route::resource('threads', 'ThreadsController')->middleware('auth');
 

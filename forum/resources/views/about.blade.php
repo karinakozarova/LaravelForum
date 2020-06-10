@@ -38,7 +38,7 @@
                     We were not happy with the current forums available.
                     <i class="em em-disappointed_relieved" aria-role="presentation" aria-label="DISAPPOINTED BUT RELIEVED FACE"></i>
                     <br>
-                    We wanted a forum that is easy ot navigate, allows the user to add categories and subcategories
+                    We wanted a forum that is easy to navigate, allows the user to add categories and subcategories
                     and has a simple yet elegant design.
                     We could not find a solution to fit our preferences
                     so we decided to build one.
