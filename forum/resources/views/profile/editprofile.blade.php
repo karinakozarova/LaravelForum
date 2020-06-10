@@ -75,10 +75,8 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Current Password</label>
-                                                    <input class="form-control" name="current-pass" type="password" placeholder="••••••" value="">
-                                                    <div class="invalid-feedback" id="passwords-current-error">
-                                                        Input does not match your current password.
-                                                    </div>
+                                                    <input class="form-control" name="current_password" type="password" placeholder="••••••" value="">
+                                                    <span class="text-danger">@error('current_password') {{ $message }} @enderror</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,7 +84,8 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>New Password</label>
-                                                    <input class="form-control" name="new-pass" type="password" placeholder="••••••" value="">
+                                                    <input class="form-control" name="new_password" type="password" placeholder="••••••" value="">
+                                                    <span class="text-danger">@error('new_password') {{ $message }} @enderror</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,10 +93,8 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                    <input class="form-control" name="new-pass-confirm" type="password" placeholder="••••••" value="">
-                                                    <div class="invalid-feedback" id="passwords-match-error">
-                                                        Password and confirmation password do not match.
-                                                    </div>
+                                                    <input class="form-control" name="confirmation_password" type="password" placeholder="••••••" value="">
+                                                    <span class="text-danger">@error('confirmation_password') {{ $message }} @enderror</span>
                                                 </div>
                                             </div>
                                         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Hash;
 use Image;
 use Auth;
 use File;
@@ -18,8 +19,31 @@ class UserController extends Controller
 
     public function update_profile(Request $request) {
 
+        if($request->has('current_password') && $request->input('current_password') != "")
+        {
+            $request->validate([
+                'current_password' => ['required', function ($attribute, $value, $fail) {
+                    if (!\Hash::check($value, Auth::user()->password)) {
+                        return $fail(__('The current password is incorrect.'));
+                    }
+                }],
+            ]);
+
+            if($request->has('new_password') && $request->input('new_password') != "")
+            {
+                $request->validate([
+                    'new_password' => 'required',
+                    'confirmation_password' => 'required|same:new_password',
+                ]);
+
+                $user = Auth::user();
+                $user->password = Hash::make($request['confirmation_password']);
+                $user->save();
+            }
+        }
+
         //Updating the user's name
-        if(($request->has('name')))
+        if($request->has('name'))
         {
             $user = Auth::user();
             $user->name = $request->input('name');
