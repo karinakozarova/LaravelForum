@@ -17,5 +17,12 @@ class ThreadSeeder extends Seeder
             'author_id' => '1',
             'category_id' => '1',
         ]);
+
+        App\Threads::create([
+            'title' => 'Second thread',
+            'description' => 'Second thread description',
+            'author_id' => '1',
+            'category_id' => '2',
+        ]);
     }
 }

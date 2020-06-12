@@ -49,6 +49,11 @@
                         <input type="file" name="thumbnail"/>
                     </div>
 
+                    <div class="form-group">
+                        <input type="checkbox" name="thumbnail_manipulation" value="image_manipulation">
+                        <label for="thumbnail_manipulation"> Apply thumbnail image manipulation</label><br>
+                    </div>
+
                     <button type="submit" class="btn btn-outline-success btn-block">Create Post</button>
                 </form>
             </div>

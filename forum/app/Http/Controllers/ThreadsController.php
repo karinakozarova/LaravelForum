@@ -56,7 +56,13 @@ class ThreadsController extends Controller
         {
             $image = $request->file('thumbnail');
             $filename = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->fit(400, 200)->save( public_path('/images/thumbnails/' . $filename));
+
+            if($request->has('thumbnail_manipulation')) {
+                $watermark = Image::make(public_path('/images/watermark.png'))->fit(75);
+                Image::make($image)->fit(400, 200)->blur(5)->greyscale()->insert($watermark, 'top-right')->save( public_path('/images/thumbnails/' . $filename));
+            } else {
+                Image::make($image)->fit(400, 200)->save( public_path('/images/thumbnails/' . $filename));
+            }
 
             $validatedData['thumbnail'] = $filename;
         }
