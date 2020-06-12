@@ -12,7 +12,9 @@
                     <div class="card-header">
                         <h5>{{ $thread->title }}  <span class="text-muted h5">({{ $thread->category ? $thread->category->name : 'Uncategorized' }})</span></h5>
                         <p> Created by {{ $thread->author->name }}</p>
-
+                        @if ($thread->thumbnail !== null)
+                            <img src="/images/thumbnails/{{ $thread->thumbnail }}" style="height: 150px;"/>
+                        @endif
                     </div>
                     <div class="card-body">
                         <p>{!! parsedown(Str::limit($thread->description, 100, '...')) !!}</p>

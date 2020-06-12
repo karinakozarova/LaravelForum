@@ -7,6 +7,8 @@ use App\Category;
 use Auth;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Image;
+use File;
 
 class ThreadsController extends Controller
 {
@@ -45,8 +47,19 @@ class ThreadsController extends Controller
             'title'         => 'required|min:3|max:255',
             'description'   => 'required|min:3',
             'category_id'   => 'required|numeric',
-            'author_id' => 'required'
+            'author_id' => 'required',
+            'thumbnail' => 'image|nullable|max:1999',
         ]);
+
+        // Handling File (Thumbnail) Upload
+        if($request->hasFile('thumbnail'))
+        {
+            $image = $request->file('thumbnail');
+            $filename = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->fit(400, 200)->save( public_path('/images/thumbnails/' . $filename));
+
+            $validatedData['thumbnail'] = $filename;
+        }
 
         Threads::create($validatedData);
         return redirect()->route('threads.index');
@@ -108,5 +121,17 @@ class ThreadsController extends Controller
     public function destroy($id)
     {
         //
+        $thread = Threads::find($id);
+        $thread->delete();
+        // Deleting file (thumbnail) from storage
+        if ($thread->thumbnail !== null) {
+            $file = public_path('/images/thumbnails/' . $thread->thumbnail);
+
+            if (File::exists($file)) {
+                //Deleting existing image file
+                unlink($file);
+            }
+        }
+        return redirect()->route('threads.index');
     }
 }

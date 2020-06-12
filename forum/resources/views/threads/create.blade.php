@@ -15,7 +15,7 @@
         <h2 class="center"> Add a new thread </h2>
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('threads.store') }}">
+                <form method="POST" action="{{ route('threads.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -42,6 +42,11 @@
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea name="description" rows="4" cols="80" class="form-control">{{ old('description') }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thumbnail" style="display: block;">Thumbnail (Optional)</label>
+                        <input type="file" name="thumbnail"/>
                     </div>
 
                     <button type="submit" class="btn btn-outline-success btn-block">Create Post</button>

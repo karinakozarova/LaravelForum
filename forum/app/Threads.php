@@ -7,7 +7,7 @@ use App\Category;
 
 class Threads extends Model
 {
-    protected $fillable = ['title', 'description', 'author_id', 'category_id'];
+    protected $fillable = ['title', 'description', 'author_id', 'category_id', 'thumbnail'];
 
     public function category()
     {
