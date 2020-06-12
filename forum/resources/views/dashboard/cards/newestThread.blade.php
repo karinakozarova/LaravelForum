@@ -4,7 +4,7 @@
         <h4>
             {{ $thread->title }}
         </h4>
-        <p>{{ $thread->description }}</p>
+        <p>{!! parsedown(Str::limit($thread->description, 500, '...')) !!}</p>
         <a href="{{ route('threads.show', $thread->id) }}" class="btn btn-primary btn-block">Open thread</a>
     </div>
 </div>

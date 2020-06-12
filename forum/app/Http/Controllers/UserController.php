@@ -13,7 +13,8 @@ class UserController extends Controller
 {
     const DEFAULT_AVATAR = 'default.png';
 
-    public function editprofile() {
+    public function index()
+    {
         return view('profile.editprofile', array('user' => Auth::user()));
     }
 

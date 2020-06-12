@@ -3,7 +3,7 @@
 @section('content')
     <div class="container py-3">
         <div class="row">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="card-body">
-                        <p>{{ $thread->description }}</p>
+                        <p>{!! parsedown($thread->description) !!}</p>
                     </div>
                 </div>
                 @include('comments.postComments')

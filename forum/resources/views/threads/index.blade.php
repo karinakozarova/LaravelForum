@@ -15,7 +15,7 @@
 
                     </div>
                     <div class="card-body">
-                        <p>{{ substr($thread->description, 0, 100) }}</p>
+                        <p>{!! parsedown(Str::limit($thread->description, 100, '...')) !!}</p>
                         <a href="{{ route('threads.show', $thread->id) }}" class="btn btn-primary btn-block">Read More</a>
                     </div>
                 </div>

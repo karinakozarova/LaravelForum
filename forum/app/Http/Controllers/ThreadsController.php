@@ -18,7 +18,7 @@ class ThreadsController extends Controller
     public function index()
     {
         $threads = Threads::all();
-        return view('threads.index')->withThreads($threads);;
+        return view('threads.index')->withThreads($threads);
     }
 
     /**
