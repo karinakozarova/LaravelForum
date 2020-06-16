@@ -1,21 +1,28 @@
 <ul class="list-group">
     @foreach ($categories as $category)
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="{{ route('category.getBySlug', $category->slug) }}" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ $category->name }}</h5>
-                @if ($category->author_id == Auth::id())
                 <small>
                     <div class="button-group d-flex">
+                        @if ($category->author_id == Auth::id())
+
                         <button type="button" class="btn btn-sm mr-1 edit-category"
                                 data-toggle="modal" data-target="#editCategoryModal"
                                 data-id="{{ $category->id }}" data-name="{{ $category->name }}"
                                 data-description="{{ $category->description }}"><i
                                     class="fas fa-edit"></i>
                         </button>
+
                         @include('categories.partials.destroyCategory')
+                        @endif
+                            <form method="get" action="{{ route('category.getBySlug', $category->slug) }}">
+                                <button type="submit" class="btn btn-sm"><i
+                                            class="fas fa-eye"></i></button>
+                            </form>
                     </div>
                 </small>
-                @endif
+
             </div>
             <p class="mb-1"> {{$category->description}}</p>
         </a>

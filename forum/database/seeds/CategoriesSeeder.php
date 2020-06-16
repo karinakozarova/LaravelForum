@@ -16,10 +16,13 @@ class CategoriesSeeder extends Seeder
     {
         DB::table('categories')->insert([
             'name' => "Unknown",
+            'slug' => "unknown",
             'description' => "All Unknown posts go here",
         ]);
+
         DB::table('categories')->insert([
                 'name' => "Random",
+                'slug' => "random",
                 'description' => "All random posts go here",
             ]
         );

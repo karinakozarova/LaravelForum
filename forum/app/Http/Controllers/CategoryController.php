@@ -8,6 +8,7 @@ use App\Category;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -56,6 +57,7 @@ class CategoryController extends Controller
             'parent_id' => 'sometimes|nullable|numeric'
         ]);
         $validatedData['author_id'] = Auth::id();
+        $validatedData['slug'] = self::createSlug($validatedData['name']);
         Category::create($validatedData);
 
         return redirect()->route('category.index')->withSuccess('You have successfully created a Category!');
@@ -120,5 +122,42 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('category.index')->withSuccess('Category was deleted.');
+    }
+
+    public function createSlug($title, $id = 0)
+    {
+        $slug = Str::slug($title);
+        $allSlugs = $this->getRelatedSlugs($slug, $id);
+
+        if (!$allSlugs->contains('slug', $slug)){
+            return $slug;
+        }
+
+        for ($i = 1; ; $i++) {
+            $newSlug = $slug.'-'.$i;
+            if (! $allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
+    }
+
+    protected function getRelatedSlugs($slug, $id = 0)
+    {
+        return Category::select('slug')->where('slug', 'like', $slug.'%')
+            ->where('id', '<>', $id)
+            ->get();
+    }
+
+    public function getBySlug($slug)
+    {
+        $category = \App\Category::where('slug', $slug)->firstOrFail();
+        $categories = Category::with('children')->whereNull('parent_id');
+        $allCategories = $categories->get();
+        $threads = \App\Threads::all()->where('category_id', $category->id);
+        return view('categories.view')->with([
+            'category' => $category,
+            'allCategories' => $allCategories,
+            'threads' => $threads,
+        ]);
     }
 }

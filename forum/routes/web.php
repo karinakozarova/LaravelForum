@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/profile/edit', 'UserController')->middleware('auth');
 Route::post('/profile/edit', 'UserController@update_profile');
 
+Route::get('/category/{slug}', 'CategoryController@getBySlug')->name('category.getBySlug');
 Route::resource('category', 'CategoryController')->middleware('auth');
 Route::resource('threads', 'ThreadsController')->middleware('auth');
 

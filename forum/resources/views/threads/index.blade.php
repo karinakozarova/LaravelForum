@@ -8,7 +8,7 @@
     <div class="row">
         @foreach($threads as $thread)
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" style="margin-bottom: 1rem">
                     <div class="card-header">
                         <h5>{{ $thread->title }}  <span class="text-muted h5">({{ $thread->category ? $thread->category->name : 'Uncategorized' }})</span></h5>
                         <p> Created by {{ $thread->author->name }}</p>
