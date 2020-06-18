@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Image;
 use Auth;
 use File;
+use phpDocumentor\Reflection\Types\Null_;
 
 class UserController extends Controller
 {
@@ -55,14 +56,43 @@ class UserController extends Controller
         if($request->hasFile('avatar'))
         {
             $avatar = $request->file('avatar');
-            $filename = time() . '-' . uniqid() . '.' . $avatar->getClientOriginalExtension();
-            Image::make($avatar)->fit(250)->save( public_path('/images/avatars/' . $filename));
+            $filename = self::DEFAULT_AVATAR;
+
+            if($request->has('avatar_manipulation'))
+            {
+                $image = Image::make($avatar)->fit(250);
+                $image->encode('png');
+                $mime = $image->mime();
+
+                $extension = '';
+
+                if ($mime == 'image/jpeg') $extension = 'jpg';
+                elseif ($mime == 'image/png') $extension = 'png';
+
+                $filename = time() . '-' . uniqid() . '.' . $extension;
+
+                $width = $image->getWidth();
+                $height = $image->getHeight();
+                $mask = Image::canvas($width, $height);
+
+                // draw a white circle
+                $mask->circle($width, $width/2, $height/2, function ($draw) {
+                    $draw->background('#fff');
+                });
+
+                $image->mask($mask, false);
+                $image->save(public_path('/images/avatars/' . $filename));
+            } else {
+                $filename = time() . '-' . uniqid() . '.' . $avatar->getClientOriginalExtension();
+
+                Image::make($avatar)->fit(250)->save(public_path('/images/avatars/' . $filename));
+            }
 
             //Retrieves logged in user form database
             $user = Auth::user();
 
             //Checks if user has already set a different picture from default
-            if ($user->avatar !== self::DEFAULT_AVATAR) {
+            if ($user->avatar !== self::DEFAULT_AVATAR && $user->avatar !== null) {
                 $file = public_path('/images/avatars/' . $user->avatar);
 
                 if (File::exists($file)) {

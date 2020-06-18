@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12 col-sm-auto mb-3">
+                                <div class="col-12 col-sm-auto mb-3 ml-3">
                                     <div class="row">
                                         <div class="mx-auto" style="width: 150px;">
                                             <img src="/images/avatars/{{ $user->avatar }}" style="width: 150px;height: 150px; float:left;"/>
@@ -49,10 +49,15 @@
                                                 <div class="form-group">
                                                     <label>Full Name</label>
                                                     <input class="form-control" id="edit-profile-form-name" type="text" name="name" placeholder="{{ Auth::user()->name }}" value="{{ Auth::user()->name }}" required
-                                                    pattern="[A-Za-z]+">
+                                                    pattern="[A-Za-z ,.'-]{2,40}">
                                                     <div class="invalid-feedback">
                                                         Please provide a valid name (Should not contain any digits).
                                                     </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="avatar_manipulation" value="image_manipulation">
+                                                    <label for="avatar_manipulation">Circular avatar crop</label><br>
                                                 </div>
                                             </div>
                                             <div class="col">
