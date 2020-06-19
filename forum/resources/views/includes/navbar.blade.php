@@ -31,12 +31,6 @@
                 <li class="nav-item {{ Route::currentRouteNamed('threads.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('threads.index') }}">Threads</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
